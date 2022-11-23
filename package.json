@@ -1,0 +1,32 @@
+{
+  "name": "services-summary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "reset": "node app-reset.js",
+    "convert": "node app-convert.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "flat": "^5.0.2",
+    "fs": "^0.0.1-security",
+    "json2csv": "^5.0.6",
+    "moment": "^2.29.1",
+    "safe-flat": "^2.0.2",
+    "simple-json-to-csv": "^1.0.2"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.5.1"
+  }
+}
