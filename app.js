@@ -33,8 +33,10 @@ const CountCdrData = async () => {
   const cc = array.countryCode;
   const startDate = moment(start).format("YYYY-MM-DD");
   const endDate = moment(end).add(-23, "hours").format("YYYY-MM-DD");
-  const folderName = `${startDate} to ${endDate}`;
-  fs.mkdirSync(`./data/${folderName}`);
+  const folderName = `./data/${startDate} to ${endDate}`;
+  if (!fs.existsSync(folderName)) {
+    fs.mkdirSync(folderName);
+  }
 
   while (trigger > 0) {
     console.log("\x1b[33m%s\x1b[0m", "Start counting....");
