@@ -45,11 +45,11 @@ const CountCdrData = async () => {
     let history = JSON.parse(fs.readFileSync("./history.json"));
     let fileName = history.fileName;
     let cdrData = [];
+    let summaryData = [];
 
     if (history.cursorCount > 0) {
-      cdrData = JSON.parse(
-        fs.readFileSync(`./data/${folderName}/${fileName}.json`)
-      );
+      cdrData = JSON.parse(fs.readFileSync(`${folderName}/${fileName}.json`));
+      summaryData = JSON.parse(fs.readFileSync(`${folderName}/Summary.json`));
     }
 
     const query = {
@@ -134,10 +134,42 @@ const CountCdrData = async () => {
           price: element.price,
           vendor: element.vendor,
         });
+
+        // write summary
+        const found = summaryData.find((element, i) => {
+          if (element.orgUuid === orgUuid) {
+            if (
+              element.senderId === senderName &&
+              element.countryCode === CountryCode
+            ) {
+              // data yang sudah ada ditambah dengan jumlah multipart
+              summaryData[i].smsCount += multipart;
+
+              return true;
+            }
+          }
+        });
+
+        if (found === undefined) {
+          // jika data tidak ada di dalam database maka masukan data baru
+          summaryData.push({
+            orgName: orgName,
+            orgUuid: orgUuid,
+            senderId: senderName,
+            countryCode: CountryCode,
+            smsCount: multipart,
+            period: startDate, // tanggal data mulai diambil
+          });
+        }
       });
 
+      const saveSummary = fs.writeFileSync(
+        `${folderName}/Summary.json`,
+        JSON.stringify(summaryData)
+      );
+
       const saveCdr = fs.writeFileSync(
-        `./data/${folderName}/${fileName}.json`,
+        `${folderName}/${fileName}.json`,
         JSON.stringify(cdrData)
       );
 
@@ -147,7 +179,7 @@ const CountCdrData = async () => {
         history.fileName = fileName;
         const array = [];
         fs.writeFileSync(
-          `./data/${folderName}/${fileName}.json`,
+          `${folderName}/${fileName}.json`,
           JSON.stringify(array)
         );
       }

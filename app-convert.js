@@ -15,6 +15,12 @@ const convertToCsv = async (data) => {
 
   console.log(folderName, "READY");
 
+  const summaryData = JSON.parse(
+    fs.readFileSync(`./data/${folderName}/Summary.json`)
+  );
+  const summary = new Converter(summaryData);
+  await summary.convert(`./data/${folderName}/Summary.csv`);
+
   let fileList = history.fileList;
 
   fileList.forEach(async (fileName) => {
