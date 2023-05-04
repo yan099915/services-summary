@@ -10,6 +10,7 @@ const resetHistory = async () => {
       cursorCount: 0,
       fileName: "1-200",
       fileList: ["1-200.json"],
+      history: "",
     };
     fs.writeFileSync("./history.json", JSON.stringify(data));
     console.log("\x1b[36m%s\x1b[0m", "Reset complete ...");

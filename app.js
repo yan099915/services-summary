@@ -71,6 +71,11 @@ const CountCdrData = async () => {
     }
 
     // jika datanya lebih dari 0
+    console.log(
+      arrayOfData.data.length > 0 && currentCursor !== nextCursor,
+      "WKOKWOKWO"
+    );
+    console.log(arrayOfData.data.length, "BABABABA");
     if (arrayOfData.data.length > 0 && currentCursor !== nextCursor) {
       console.log(arrayOfData.data.length);
 
