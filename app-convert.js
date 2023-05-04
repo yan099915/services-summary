@@ -22,14 +22,13 @@ const convertToCsv = async (data) => {
   await summary.convert(`./data/${folderName}/Summary.csv`);
 
   let fileList;
-
+  let array = history.fileList;
   if (history.history !== "") {
-    fileList = history.fileList.splice(
-      0,
-      history.fileList.indexOf(history.history)
-    );
+    const index = history.fileList.indexOf(history.history);
+    array.splice(0, index);
+    fileList = array;
   } else {
-    fileList = history.fileList;
+    fileList = array;
   }
 
   fileList.forEach(async (fileName) => {
@@ -39,7 +38,7 @@ const convertToCsv = async (data) => {
     await file.convert(`./data/${folderName}/${fileName}.csv`);
     // save last index of converted json'
     history.history = fileName;
-    const saveCdr = fs.writeFileSync(`history.json`, JSON.stringify(history));
+    const saveCdr = fs.writeFileSync(`./history.json`, JSON.stringify(history));
     console.log("\x1b[32m%s\x1b[0m", `${fileName} converted successfully ...`);
   });
 
