@@ -71,11 +71,11 @@ const CountCdrData = async () => {
     }
 
     // jika datanya lebih dari 0
-    console.log(
-      arrayOfData.data.length > 0 && currentCursor !== nextCursor,
-      "WKOKWOKWO"
-    );
-    console.log(arrayOfData.data.length, "BABABABA");
+    // console.log(
+    //   arrayOfData.data.length > 0 && currentCursor !== nextCursor,
+    //   "WKOKWOKWO"
+    // );
+
     if (arrayOfData.data.length > 0 && currentCursor !== nextCursor) {
       console.log(arrayOfData.data.length);
 
@@ -178,8 +178,8 @@ const CountCdrData = async () => {
         JSON.stringify(cdrData)
       );
 
-      if (history.cursorCount !== 0 && history.cursorCount % 200 === 0) {
-        fileName = `${history.cursorCount + 1}-${history.cursorCount + 200}`;
+      if (history.cursorCount !== 0 && history.cursorCount % 100 === 0) {
+        fileName = `${history.cursorCount + 1}-${history.cursorCount + 100}`;
         history.fileList.push(`${fileName}.json`);
         history.fileName = fileName;
         const array = [];

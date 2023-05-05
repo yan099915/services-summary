@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "reset": "node app-reset.js",
-    "convert": "node app-convert.js"
+    "convert": "node app-convert.js",
+    "count": "node app-counting.js"
   },
   "author": "",
   "license": "ISC",
