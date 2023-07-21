@@ -70,12 +70,6 @@ const CountCdrData = async () => {
       currentCursor = "initial";
     }
 
-    // jika datanya lebih dari 0
-    // console.log(
-    //   arrayOfData.data.length > 0 && currentCursor !== nextCursor,
-    //   "WKOKWOKWO"
-    // );
-
     if (arrayOfData.data.length > 0 && currentCursor !== nextCursor) {
       console.log(arrayOfData.data.length);
 
@@ -125,7 +119,10 @@ const CountCdrData = async () => {
           orgUuid: orgUuid,
           orgTags: JSON.stringify(element.orgTags),
           txnUuid: element.txnUuid,
-          cursor: currentCursor,
+          cursor:
+            currentCursor === "earliest" && nextCursor === "earliest"
+              ? "earliest"
+              : history.nextCursor,
           countryCode: CountryCode,
           time: element.time,
           type: element.type,
